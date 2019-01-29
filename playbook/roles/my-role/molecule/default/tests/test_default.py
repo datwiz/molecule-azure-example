@@ -1,11 +1,6 @@
 # import os
 import pytest
 
-# import testinfra.utils.ansible_runner
-
-# testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
-#     os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
-
 
 # expected installed packages
 @pytest.mark.parametrize('package', [
@@ -14,6 +9,7 @@ import pytest
 def test_installed_packages(host, package):
     pkg = host.package(package)
     assert pkg.is_installed
+
 
 # expected services are running and enabled
 @pytest.mark.parametrize('service', [
@@ -24,8 +20,9 @@ def test_running_services(host, service):
     assert svc.is_running
     assert svc.is_enabled
 
+
 # expected ports listening
-# note that is a test of port binding, not firewall/network security group rules
+# note testing port binding, not firewall/network security group rules
 @pytest.mark.parametrize('socket', [
     ('tcp://0.0.0.0:80'),
 ])
