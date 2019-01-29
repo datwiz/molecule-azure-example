@@ -21,6 +21,11 @@ infrastructure provider.  molecule also provides drivers for private and public 
 with fewer examples and tutorials for cloud providers, getting up and running with molecule can be a
 bit more challanging.
 
+Local drivers like virtual box enable fast iteration of the configuration but aren't able to help with:
+* running services under systemd - a typical docker container would not include a systemd supervisor
+* not the same operating context - available resources and networks
+* not the same OS as the target environment
+
 ### molecule on Azure
 The default templates for the azure driver are geared towards a personal tutorial environment, where
 you own a subscription and have the rights to create resource groups and networks with public IP
