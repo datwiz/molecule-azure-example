@@ -4,36 +4,25 @@
   connection: local
   gather_facts: false
   no_log: "{{ not (lookup('env', 'MOLECULE_DEBUG') | bool or molecule_yml.provisioner.log|default(false) | bool) }}"
+  # no_log: false
   vars:
-    resource_group_name: molecule
-    location: westus
+    resource_group_name: infracode_sandbox
+    location: australiasoutheast
     ssh_user: molecule
     ssh_port: 22
-    virtual_network_name: molecule_vnet
-    subnet_name: molecule_subnet
+    virtual_network_name: infracode_test_vnet
+    subnet_name: default
+    vm_size: Standard_B1s
+    image:
+      offer: UbuntuServer
+      publisher: Canonical
+      sku: 18.04-LTS
+      version: latest
     keypair_path: "{{ lookup('env', 'MOLECULE_EPHEMERAL_DIRECTORY') }}/ssh_key"
   tasks:
-    - name: Create resource group
-      azure_rm_resourcegroup:
-        name: "{{ resource_group_name }}"
-        location: "{{ location }}"
-
-    - name: Create virtual network
-      azure_rm_virtualnetwork:
-        resource_group: "{{ resource_group_name }}"
-        name: "{{ virtual_network_name }}"
-        address_prefixes: "10.10.0.0/16"
-
-    - name: Create subnet
-      azure_rm_subnet:
-        resource_group: "{{ resource_group_name }}"
-        name: "{{ subnet_name }}"
-        address_prefix_cidr: 10.10.1.0/24
-        virtual_network_name: "{{ virtual_network_name }}"
-
     - name: Create keypair
       user:
-        name: "{{ lookup('env', 'USER') }}"
+        name: "{{ ssh_user }}"
         generate_ssh_key: true
         ssh_key_file: "{{ keypair_path }}"
       register: keypair
@@ -42,7 +31,8 @@
       azure_rm_virtualmachine:
         resource_group: "{{ resource_group_name }}"
         name: "{{ item.name }}"
-        vm_size: Standard_A0
+        vm_size: "{{ vm_size }}"
+        managed_disk_type: "Standard_LRS"
         admin_username: "{{ ssh_user }}"
         public_ip_allocation_method: Dynamic
         ssh_password_enabled: false
@@ -50,10 +40,10 @@
           - path: "/home/{{ ssh_user }}/.ssh/authorized_keys"
             key_data: "{{ keypair.ssh_public_key }}"
         image:
-          offer: CentOS
-          publisher: OpenLogic
-          sku: '7.4'
-          version: latest
+          offer: "{{ image.offer }}"
+          publisher: "{{ image.publisher }}"
+          sku: "{{ image.sku }}"
+          version: "{{ image.version }}"
       register: server
       with_items: "{{ molecule_yml.platforms }}"
       async: 7200

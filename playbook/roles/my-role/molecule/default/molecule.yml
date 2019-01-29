@@ -6,7 +6,7 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: instance
+  - name: my-role-bionic
 provisioner:
   name: ansible
   lint:
@@ -15,5 +15,7 @@ scenario:
   name: default
 verifier:
   name: testinfra
+  options:
+    sudo: True
   lint:
     name: flake8
