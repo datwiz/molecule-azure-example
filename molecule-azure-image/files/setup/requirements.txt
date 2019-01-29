@@ -42,7 +42,7 @@ click==6.7
 click-completion==0.3.1
 colorama==0.3.9
 cookiecutter==1.6.0
-cryptography==2.1.4
+cryptography>=2.3
 entrypoints==0.3
 fasteners==0.14.1
 flake8==3.5.0
@@ -91,7 +91,7 @@ python-apt==1.6.3
 python-dateutil==2.7.5
 python-gilt==1.2.1
 pyxdg==0.25
-PyYAML==3.13
+PyYAML>=4.2b1
 requests==2.21.0
 requests-oauthlib==1.2.0
 SecretStorage==2.3.1
