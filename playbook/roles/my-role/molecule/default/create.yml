@@ -4,20 +4,9 @@
   connection: local
   gather_facts: false
   no_log: "{{ not (lookup('env', 'MOLECULE_DEBUG') | bool or molecule_yml.provisioner.log|default(false) | bool) }}"
-  # no_log: false
   vars:
-    resource_group_name: infracode_sandbox
-    location: australiasoutheast
     ssh_user: molecule
     ssh_port: 22
-    virtual_network_name: infracode_test_vnet
-    subnet_name: default
-    vm_size: Standard_B1s
-    image:
-      offer: UbuntuServer
-      publisher: Canonical
-      sku: 18.04-LTS
-      version: latest
     keypair_path: "{{ lookup('env', 'MOLECULE_EPHEMERAL_DIRECTORY') }}/ssh_key"
   tasks:
     - name: Create keypair
@@ -29,9 +18,9 @@
 
     - name: Create molecule instance(s)
       azure_rm_virtualmachine:
-        resource_group: "{{ resource_group_name }}"
+        resource_group: "{{ item.resource_group_name }}"
         name: "{{ item.name }}"
-        vm_size: "{{ vm_size }}"
+        vm_size: "{{ item.vm_size }}"
         managed_disk_type: "Standard_LRS"
         admin_username: "{{ ssh_user }}"
         public_ip_allocation_method: Dynamic
@@ -39,11 +28,7 @@
         ssh_public_keys:
           - path: "/home/{{ ssh_user }}/.ssh/authorized_keys"
             key_data: "{{ keypair.ssh_public_key }}"
-        image:
-          offer: "{{ image.offer }}"
-          publisher: "{{ image.publisher }}"
-          sku: "{{ image.sku }}"
-          version: "{{ image.version }}"
+        image: "{{ item.image }}"
       register: server
       with_items: "{{ molecule_yml.platforms }}"
       async: 7200
