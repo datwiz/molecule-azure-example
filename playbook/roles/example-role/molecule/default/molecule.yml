@@ -6,7 +6,7 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: my-role-bionic
+  - name: example-role-bionic
     # resource_group_name: infracode_sandbox
     resource_group_name: ${AZURE_RESOURCE_GROUP:-molecule}
     vm_size: Standard_B1s

@@ -1,0 +1,56 @@
+molecule@babd9499881e:/playbook/roles/my-role$ molecule verify
+--> Validating schema /playbook/roles/my-role/molecule/default/molecule.yml.
+Validation completed successfully.
+--> Test matrix
+
+└── default
+    └── verify
+
+--> Scenario: 'default'
+--> Action: 'verify'
+--> Executing Testinfra tests found in /playbook/roles/my-role/molecule/default/tests/...
+    ============================= test session starts ==============================
+    platform linux -- Python 3.6.7, pytest-4.1.1, py-1.7.0, pluggy-0.8.1
+    rootdir: /playbook/roles/my-role/molecule/default, inifile:
+    plugins: testinfra-1.16.0
+collected 5 items
+
+    tests/test_default.py ..FFF                                              [100%]
+
+    =================================== FAILURES ===================================
+    ______________ test_installed_packages[ansible://my-role-bionic] _______________
+
+    host = <testinfra.host.Host object at 0x7f66dd329eb8>
+
+        def test_installed_packages(host):
+    >       assert host.package('nginx').is_installed
+    E       AssertionError: assert False
+    E        +  where False = <package nginx>.is_installed
+    E        +    where <package nginx> = <class 'testinfra.modules.base.DebianPackage'>('nginx')
+    E        +      where <class 'testinfra.modules.base.DebianPackage'> = <testinfra.host.Host object at 0x7f66dd329eb8>.package
+
+    tests/test_default.py:14: AssertionError
+    _______________ test_running_services[ansible://my-role-bionic] ________________
+
+    host = <testinfra.host.Host object at 0x7f66dd329eb8>
+
+        def test_running_services(host):
+            svc = host.service('nginx')
+    >       assert svc.is_running
+    E       assert False
+    E        +  where False = <service nginx>.is_running
+
+    tests/test_default.py:19: AssertionError
+    _________________ test_port_bindings[ansible://my-role-bionic] _________________
+
+    host = <testinfra.host.Host object at 0x7f66dd329eb8>
+
+        def test_port_bindings(host):
+    >       assert host.socket('tcp://0.0.0.0:80').is_listening
+    E       AssertionError: assert False
+    E        +  where False = <socket tcp://0.0.0.0:80>.is_listening
+    E        +    where <socket tcp://0.0.0.0:80> = <class 'testinfra.modules.base.LinuxSocketSS'>('tcp://0.0.0.0:80')
+    E        +      where <class 'testinfra.modules.base.LinuxSocketSS'> = <testinfra.host.Host object at 0x7f66dd329eb8>.socket
+
+    tests/test_default.py:26: AssertionError
+    ===================== 3 failed, 2 passed in 21.29 seconds ======================

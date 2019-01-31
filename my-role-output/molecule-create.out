@@ -1,0 +1,87 @@
+molecule@babd9499881e:/playbook/roles/my-role$ molecule create
+--> Validating schema /playbook/roles/my-role/molecule/default/molecule.yml.
+Validation completed successfully.
+--> Test matrix
+
+└── default
+    ├── create
+    └── prepare
+
+--> Scenario: 'default'
+--> Action: 'create'
+
+    PLAY [Create] ******************************************************************
+
+    TASK [Create keypair] **********************************************************
+    changed: [localhost]
+
+    TASK [Create molecule instance(s)] *********************************************
+    changed: [localhost] => (item=None)
+    changed: [localhost]
+
+    TASK [Wait for instance(s) creation to complete] *******************************
+    FAILED - RETRYING: Wait for instance(s) creation to complete (300 retries left).
+    FAILED - RETRYING: Wait for instance(s) creation to complete (299 retries left).
+    FAILED - RETRYING: Wait for instance(s) creation to complete (298 retries left).
+    FAILED - RETRYING: Wait for instance(s) creation to complete (297 retries left).
+    FAILED - RETRYING: Wait for instance(s) creation to complete (296 retries left).
+    FAILED - RETRYING: Wait for instance(s) creation to complete (295 retries left).
+    FAILED - RETRYING: Wait for instance(s) creation to complete (294 retries left).
+    FAILED - RETRYING: Wait for instance(s) creation to complete (293 retries left).
+    FAILED - RETRYING: Wait for instance(s) creation to complete (292 retries left).
+    FAILED - RETRYING: Wait for instance(s) creation to complete (291 retries left).
+    FAILED - RETRYING: Wait for instance(s) creation to complete (290 retries left).
+    FAILED - RETRYING: Wait for instance(s) creation to complete (289 retries left).
+    FAILED - RETRYING: Wait for instance(s) creation to complete (288 retries left).
+    FAILED - RETRYING: Wait for instance(s) creation to complete (287 retries left).
+    FAILED - RETRYING: Wait for instance(s) creation to complete (286 retries left).
+    FAILED - RETRYING: Wait for instance(s) creation to complete (285 retries left).
+    FAILED - RETRYING: Wait for instance(s) creation to complete (284 retries left).
+    FAILED - RETRYING: Wait for instance(s) creation to complete (283 retries left).
+    FAILED - RETRYING: Wait for instance(s) creation to complete (282 retries left).
+    FAILED - RETRYING: Wait for instance(s) creation to complete (281 retries left).
+    FAILED - RETRYING: Wait for instance(s) creation to complete (280 retries left).
+    FAILED - RETRYING: Wait for instance(s) creation to complete (279 retries left).
+    FAILED - RETRYING: Wait for instance(s) creation to complete (278 retries left).
+    FAILED - RETRYING: Wait for instance(s) creation to complete (277 retries left).
+    FAILED - RETRYING: Wait for instance(s) creation to complete (276 retries left).
+    FAILED - RETRYING: Wait for instance(s) creation to complete (275 retries left).
+    FAILED - RETRYING: Wait for instance(s) creation to complete (274 retries left).
+    FAILED - RETRYING: Wait for instance(s) creation to complete (273 retries left).
+    changed: [localhost] => (item=None)
+    changed: [localhost]
+
+    TASK [Populate instance config dict] *******************************************
+    ok: [localhost] => (item=None)
+    ok: [localhost]
+
+    TASK [Convert instance config dict to a list] **********************************
+    ok: [localhost]
+
+    TASK [Dump instance config] ****************************************************
+    changed: [localhost]
+
+    TASK [Wait for SSH] ************************************************************
+    ok: [localhost] => (item=None)
+    ok: [localhost]
+
+    PLAY RECAP *********************************************************************
+    localhost                  : ok=7    changed=4    unreachable=0    failed=0
+
+
+--> Scenario: 'default'
+--> Action: 'prepare'
+Skipping, prepare playbook not configured.
+
+
+molecule@babd9499881e:/playbook/roles/my-role$ molecule list
+--> Validating schema /playbook/roles/my-role/molecule/default/molecule.yml.
+Validation completed successfully.
+Instance Name    Driver Name    Provisioner Name    Scenario Name    Created    Converged
+---------------  -------------  ------------------  ---------------  ---------  -----------
+my-role-bionic   azure          ansible             default          true       false
+
+molecule@babd9499881e:/playbook/roles/my-role$ az vm list -g infracode_sandbox -o table
+Name            ResourceGroup      Location            Zones
+--------------  -----------------  ------------------  -------
+my-role-bionic  infracode_sandbox  australiasoutheast

@@ -1,5 +1,5 @@
 ---
-# tasks file for my-role
+# tasks file for example-role
 - name: install nginx as a service
   package:
     name: "nginx"

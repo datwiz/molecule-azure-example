@@ -1,0 +1,60 @@
+molecule@babd9499881e:/playbook/roles/my-role$ molecule destroy
+--> Validating schema /playbook/roles/my-role/molecule/default/molecule.yml.
+Validation completed successfully.
+--> Test matrix
+
+└── default
+    └── destroy
+
+--> Scenario: 'default'
+--> Action: 'destroy'
+
+    PLAY [Destroy] *****************************************************************
+
+    TASK [Destroy molecule instance(s)] ********************************************
+    changed: [localhost] => (item=None)
+    changed: [localhost]
+
+    TASK [Wait for instance(s) deletion to complete] *******************************
+    FAILED - RETRYING: Wait for instance(s) deletion to complete (300 retries left).
+    FAILED - RETRYING: Wait for instance(s) deletion to complete (299 retries left).
+    FAILED - RETRYING: Wait for instance(s) deletion to complete (298 retries left).
+    FAILED - RETRYING: Wait for instance(s) deletion to complete (297 retries left).
+    FAILED - RETRYING: Wait for instance(s) deletion to complete (296 retries left).
+    FAILED - RETRYING: Wait for instance(s) deletion to complete (295 retries left).
+    FAILED - RETRYING: Wait for instance(s) deletion to complete (294 retries left).
+    FAILED - RETRYING: Wait for instance(s) deletion to complete (293 retries left).
+    FAILED - RETRYING: Wait for instance(s) deletion to complete (292 retries left).
+    FAILED - RETRYING: Wait for instance(s) deletion to complete (291 retries left).
+    FAILED - RETRYING: Wait for instance(s) deletion to complete (290 retries left).
+    FAILED - RETRYING: Wait for instance(s) deletion to complete (289 retries left).
+    FAILED - RETRYING: Wait for instance(s) deletion to complete (288 retries left).
+    FAILED - RETRYING: Wait for instance(s) deletion to complete (287 retries left).
+    FAILED - RETRYING: Wait for instance(s) deletion to complete (286 retries left).
+    FAILED - RETRYING: Wait for instance(s) deletion to complete (285 retries left).
+    FAILED - RETRYING: Wait for instance(s) deletion to complete (284 retries left).
+    FAILED - RETRYING: Wait for instance(s) deletion to complete (283 retries left).
+    FAILED - RETRYING: Wait for instance(s) deletion to complete (282 retries left).
+    changed: [localhost] => (item=None)
+    changed: [localhost]
+
+    TASK [Populate instance config] ************************************************
+    ok: [localhost]
+
+    TASK [Dump instance config] ****************************************************
+    changed: [localhost]
+
+    PLAY RECAP *********************************************************************
+    localhost                  : ok=4    changed=3    unreachable=0    failed=0
+
+
+molecule@babd9499881e:/playbook/roles/my-role$ molecule list
+--> Validating schema /playbook/roles/my-role/molecule/default/molecule.yml.
+Validation completed successfully.
+Instance Name    Driver Name    Provisioner Name    Scenario Name    Created    Converged
+---------------  -------------  ------------------  ---------------  ---------  -----------
+my-role-bionic   azure          ansible             default          false      false
+
+molecule@babd9499881e:/playbook/roles/my-role$ az vm list -o table -g ${AZURE_RESOURCE_GROUP}
+Name         ResourceGroup      Location            Zones
+-----------  -----------------  ------------------  -------

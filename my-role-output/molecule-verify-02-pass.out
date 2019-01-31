@@ -1,0 +1,21 @@
+molecule@babd9499881e:/playbook/roles/my-role$ molecule verify
+--> Validating schema /playbook/roles/my-role/molecule/default/molecule.yml.
+Validation completed successfully.
+--> Test matrix
+
+└── default
+    └── verify
+
+--> Scenario: 'default'
+--> Action: 'verify'
+--> Executing Testinfra tests found in /playbook/roles/my-role/molecule/default/tests/...
+    ============================= test session starts ==============================
+    platform linux -- Python 3.6.7, pytest-4.1.1, py-1.7.0, pluggy-0.8.1
+    rootdir: /playbook/roles/my-role/molecule/default, inifile:
+    plugins: testinfra-1.16.0
+collected 5 items
+
+    tests/test_default.py .....                                              [100%]
+
+    ========================== 5 passed in 16.36 seconds ===========================
+Verifier completed successfully.

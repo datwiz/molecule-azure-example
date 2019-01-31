@@ -1,0 +1,76 @@
+molecule@babd9499881e:/playbook/roles/my-role$ molecule converge
+--> Validating schema /playbook/roles/my-role/molecule/default/molecule.yml.
+Validation completed successfully.
+--> Test matrix
+
+└── default
+    ├── dependency
+    ├── create
+    ├── prepare
+    └── converge
+
+--> Scenario: 'default'
+--> Action: 'dependency'
+Skipping, missing the requirements file.
+--> Scenario: 'default'
+--> Action: 'create'
+Skipping, instances already created.
+--> Scenario: 'default'
+--> Action: 'prepare'
+Skipping, prepare playbook not configured.
+--> Scenario: 'default'
+--> Action: 'converge'
+
+    PLAY [Converge] ****************************************************************
+
+    TASK [Gathering Facts] *********************************************************
+    ok: [my-role-bionic]
+
+    PLAY RECAP *********************************************************************
+    my-role-bionic             : ok=1    changed=0    unreachable=0    failed=0
+
+
+molecule@babd9499881e:/playbook/roles/my-role$ vi tasks/main.yml
+molecule@babd9499881e:/playbook/roles/my-role$
+molecule@babd9499881e:/playbook/roles/my-role$
+molecule@babd9499881e:/playbook/roles/my-role$ molecule converge
+--> Validating schema /playbook/roles/my-role/molecule/default/molecule.yml.
+Validation completed successfully.
+--> Test matrix
+
+└── default
+    ├── dependency
+    ├── create
+    ├── prepare
+    └── converge
+
+--> Scenario: 'default'
+--> Action: 'dependency'
+Skipping, missing the requirements file.
+--> Scenario: 'default'
+--> Action: 'create'
+Skipping, instances already created.
+--> Scenario: 'default'
+--> Action: 'prepare'
+Skipping, prepare playbook not configured.
+--> Scenario: 'default'
+--> Action: 'converge'
+
+    PLAY [Converge] ****************************************************************
+
+    TASK [Gathering Facts] *********************************************************
+    ok: [my-role-bionic]
+
+    TASK [my-role : install nginx as a service] ************************************
+    changed: [my-role-bionic]
+
+    PLAY RECAP *********************************************************************
+    my-role-bionic             : ok=2    changed=1    unreachable=0    failed=0
+
+
+molecule@babd9499881e:/playbook/roles/my-role$ molecule list
+--> Validating schema /playbook/roles/my-role/molecule/default/molecule.yml.
+Validation completed successfully.
+Instance Name    Driver Name    Provisioner Name    Scenario Name    Created    Converged
+---------------  -------------  ------------------  ---------------  ---------  -----------
+my-role-bionic   azure          ansible             default          true       true

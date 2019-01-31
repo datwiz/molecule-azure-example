@@ -3,3 +3,6 @@
 
 # ignore vi swap files
 .*.swp
+
+# ignore the how-to role
+playbook/roles/my-role/**
