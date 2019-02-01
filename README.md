@@ -1,4 +1,6 @@
 # Test Driven Infrastructure with Ansiblei, Molecule, and Azure
+[Test Driven Infrastructure and Test Automation with Ansible, Molecule, and Azure](https://www.cloudywithachanceofbigdata.com/test-driven-infrastructure-and-test-automation-with-ansible-molecule-and-azure/)
+
 This tutorial demonstrates how to use Molecule with Azure to develop and test an individual Ansible
 role following the the red/green/refactor infracode workflow, which can be generalised as:
 * Red - write a failing infrastructure test
