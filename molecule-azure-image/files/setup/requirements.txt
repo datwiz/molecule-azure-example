@@ -66,7 +66,7 @@ msrest==0.4.29
 msrestazure==0.4.31
 oauthlib==3.0.1
 packaging==19.0
-paramiko==2.4.2
+paramiko==2.10.1
 pathspec==0.5.9
 pbr==4.1.0
 pexpect==4.6.0
