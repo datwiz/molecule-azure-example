@@ -4,7 +4,7 @@ ansible-lint==3.4.23
 anyconfig==0.9.7
 applicationinsights==0.11.7
 argcomplete==1.9.4
-arrow==0.13.0
+arrow==0.15.1
 asn1crypto==0.24.0
 atomicwrites==1.2.1
 attrs==18.2.0
